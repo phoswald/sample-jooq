@@ -1,6 +1,6 @@
-# sample-spark
+# sample-jooq
 
-Experiments with Spark and Docker, featuring:
+Experiments with JOOQ and Docker, featuring:
 
 - Static web content
 - Dynamic web content using Thymeleaf
@@ -22,12 +22,12 @@ $ java \
 
 ~~~
 $ mvn clean verify -P docker
-$ docker run -it --name sample-spark-jooq --rm \
+$ docker run -it --name sample-jooq --rm \
   -p 8080:8080 \
   -e APP_SAMPLE_CONFIG=ValueFromDockerRun \
   -e APP_JDBC_URL=jdbc:h2:/databases/task-db \
   -v "$(pwd)/../databases":/databases \
-  sample-spark-jooq:0.1.0-SNAPSHOT
+  sample-jooq:0.1.0-SNAPSHOT
 ~~~
 
 # URLs
@@ -58,4 +58,5 @@ $ curl 'http://localhost:8080/app/rest/tasks/5b89f266-c566-4d1f-8545-451bc443cf2
 
 1.  Start H2 with `$ java -jar target/lib/h2-2.1.214.jar` and open UI in browser.
 2.  Open database `jdbc:h2:./databases/task-db` with username `sa` password `sa`.
-3.  Execute script `src/main/resources/schema.sql`. 
+3.  Execute script `src/main/resources/schema.sql`.
+

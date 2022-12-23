@@ -40,7 +40,7 @@ class ApplicationTest {
         then().
             statusCode(200).
             contentType("text/html").
-            body(startsWith("<!doctype html>"), containsString("<title>Spark Sample Service</title>"));
+            body(startsWith("<!doctype html>"), containsString("<title>JOOQ Sample Service</title>"));
     }
 
     @Test
