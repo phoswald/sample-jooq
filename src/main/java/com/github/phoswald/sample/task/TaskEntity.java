@@ -27,7 +27,7 @@ public class TaskEntity {
     }
 
     public void setNewTaskId() {
-        this.taskId = UUID.randomUUID().toString();
+        this.taskId = UUID.randomUUID().toString().replace("-", "");
     }
 
     public String getUserId() {
