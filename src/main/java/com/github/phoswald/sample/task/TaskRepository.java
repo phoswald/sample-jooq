@@ -1,6 +1,6 @@
 package com.github.phoswald.sample.task;
 
-import static com.github.phoswald.sample.jooq.Tables.TASK;
+import static com.github.phoswald.sample.jooq.Tables.TASK_;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -36,54 +36,54 @@ public class TaskRepository implements AutoCloseable {
     }
 
     public List<TaskEntity> selectAllTasks() {
-        Result<Record> result = dsl.select().from(TASK).orderBy(TASK.TIMESTAMP.desc()).fetch();
+        Result<Record> result = dsl.select().from(TASK_).orderBy(TASK_.TIMESTAMP_.desc()).fetch();
         List<TaskEntity> entities = new ArrayList<>();
         for(Record record : result) {
             TaskEntity entity = new TaskEntity();
-            entity.setTaskId(record.get(TASK.TASK_ID));
-            entity.setUserId(record.get(TASK.USER_ID));
-            entity.setTimestamp(convertTimestamp(record.get(TASK.TIMESTAMP)));
-            entity.setTitle(record.get(TASK.TITLE));
-            entity.setDescription(record.get(TASK.DESCRIPTION));
-            entity.setDone(record.get(TASK.DONE));
+            entity.setTaskId(record.get(TASK_.TASK_ID_));
+            entity.setUserId(record.get(TASK_.USER_ID_));
+            entity.setTimestamp(convertTimestamp(record.get(TASK_.TIMESTAMP_)));
+            entity.setTitle(record.get(TASK_.TITLE_));
+            entity.setDescription(record.get(TASK_.DESCRIPTION_));
+            entity.setDone(record.get(TASK_.DONE_));
             entities.add(entity);
         }
         return entities;
     }
 
     public TaskEntity selectTaskById(String taskId) {
-        Record record = dsl.select().from(TASK).where(TASK.TASK_ID.eq(taskId)).fetchOne();
+        Record record = dsl.select().from(TASK_).where(TASK_.TASK_ID_.eq(taskId)).fetchOne();
         if(record == null)  {
             return null;
         } else {
             TaskEntity entity = new TaskEntity();
-            entity.setTaskId(record.get(TASK.TASK_ID));
-            entity.setUserId(record.get(TASK.USER_ID));
-            entity.setTimestamp(convertTimestamp(record.get(TASK.TIMESTAMP)));
-            entity.setTitle(record.get(TASK.TITLE));
-            entity.setDescription(record.get(TASK.DESCRIPTION));
-            entity.setDone(record.get(TASK.DONE));
+            entity.setTaskId(record.get(TASK_.TASK_ID_));
+            entity.setUserId(record.get(TASK_.USER_ID_));
+            entity.setTimestamp(convertTimestamp(record.get(TASK_.TIMESTAMP_)));
+            entity.setTitle(record.get(TASK_.TITLE_));
+            entity.setDescription(record.get(TASK_.DESCRIPTION_));
+            entity.setDone(record.get(TASK_.DONE_));
             return entity;
         }
     }
 
     public void createTask(TaskEntity entity) {
-        dsl.insertInto(TASK, TASK.TASK_ID, TASK.USER_ID, TASK.TIMESTAMP, TASK.TITLE, TASK.DESCRIPTION, TASK.DONE)
+        dsl.insertInto(TASK_, TASK_.TASK_ID_, TASK_.USER_ID_, TASK_.TIMESTAMP_, TASK_.TITLE_, TASK_.DESCRIPTION_, TASK_.DONE_)
             .values(entity.getTaskId(), entity.getUserId(), convertTimestamp(entity.getTimestamp()), entity.getTitle(), entity.getDescription(), entity.isDone())
             .execute();
     }
 
     public void deleteTask(TaskEntity entity) {
-        dsl.deleteFrom(TASK).where(TASK.TASK_ID.eq(entity.getTaskId())).execute();
+        dsl.deleteFrom(TASK_).where(TASK_.TASK_ID_.eq(entity.getTaskId())).execute();
     }
 
     public void updateTask(TaskEntity entity) {
-        dsl.update(TASK)
-                .set(TASK.TIMESTAMP, convertTimestamp(entity.getTimestamp()))
-                .set(TASK.TITLE, entity.getTitle())
-                .set(TASK.DESCRIPTION, entity.getDescription())
-                .set(TASK.DONE, entity.isDone())
-                .where(TASK.TASK_ID.eq(entity.getTaskId()))
+        dsl.update(TASK_)
+                .set(TASK_.TIMESTAMP_, convertTimestamp(entity.getTimestamp()))
+                .set(TASK_.TITLE_, entity.getTitle())
+                .set(TASK_.DESCRIPTION_, entity.getDescription())
+                .set(TASK_.DONE_, entity.isDone())
+                .where(TASK_.TASK_ID_.eq(entity.getTaskId()))
                 .execute();
     }
 

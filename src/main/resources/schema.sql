@@ -1,8 +1,8 @@
-CREATE TABLE IF NOT EXISTS TASK (
-  TASK_ID     VARCHAR(255) PRIMARY KEY NOT NULL,
-  USER_ID     VARCHAR(255),
-  TIMESTAMP   TIMESTAMP,
-  TITLE       VARCHAR(255),
-  DESCRIPTION VARCHAR(255),
-  DONE        BOOLEAN
+create table if not exists task_ (
+  task_id_      varchar(255) primary key not null,
+  user_id_      varchar(255),
+  timestamp_    timestamp,
+  title_        varchar(255),
+  description_  varchar(255),
+  done_         boolean
 );
