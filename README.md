@@ -55,9 +55,12 @@ $ curl 'http://localhost:8080/app/rest/tasks/5b89f266-c566-4d1f-8545-451bc443cf2
 $ curl 'http://localhost:8080/app/rest/tasks/5b89f266-c566-4d1f-8545-451bc443cf26' -i -X DELETE
 ~~~
 
-# Database setup
+## Database:
 
-1.  Start H2 with `$ java -jar target/lib/h2-2.1.214.jar` and open UI in browser.
-2.  Open database `jdbc:h2:./databases/task-db` with username `sa` password `sa`.
-3.  Execute script `src/main/resources/schema.sql`.
+See SQL DDL for [H2](src/main/resources/schema.sql).
 
+Start H2 Console in current directory (use JDBC URL with relative path, log in with `sa:sa`):
+
+~~~
+$ java -jar target/sample-jooq-*-dist/lib/h2-*.jar
+~~~
